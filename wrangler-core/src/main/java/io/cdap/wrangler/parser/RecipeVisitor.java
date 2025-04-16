@@ -22,6 +22,7 @@ import io.cdap.wrangler.api.SourceInfo;
 import io.cdap.wrangler.api.Triplet;
 import io.cdap.wrangler.api.parser.Bool;
 import io.cdap.wrangler.api.parser.BoolList;
+import io.cdap.wrangler.api.parser.ByteSize;
 import io.cdap.wrangler.api.parser.ColumnName;
 import io.cdap.wrangler.api.parser.ColumnNameList;
 import io.cdap.wrangler.api.parser.DirectiveName;
@@ -33,6 +34,7 @@ import io.cdap.wrangler.api.parser.Properties;
 import io.cdap.wrangler.api.parser.Ranges;
 import io.cdap.wrangler.api.parser.Text;
 import io.cdap.wrangler.api.parser.TextList;
+import io.cdap.wrangler.api.parser.TimeDuration;
 import io.cdap.wrangler.api.parser.Token;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.Interval;
@@ -314,6 +316,42 @@ public final class RecipeVisitor extends DirectivesBaseVisitor<RecipeSymbol.Buil
       strs.add(text.substring(1, text.length() - 1));
     }
     builder.addToken(new TextList(strs));
+    return builder;
+  }
+
+ /**
+ * Processes a BYTE_SIZE argument encountered in the parse tree.
+ *
+ * This method is invoked when the parser identifies a BYTE_SIZE token,
+ * such as "512KB" or "1.5MB", in the input. It extracts the textual
+ * representation of the byte size from the context, constructs a
+ * ByteSize object to encapsulate the value and its unit, and adds this
+ * token to the current RecipeSymbol.Builder instance for further processing.
+ *
+ * @param ctx The parse tree context corresponding to the BYTE_SIZE argument.
+ * @return The updated RecipeSymbol.Builder instance with the new ByteSize token added.
+ */
+  @Override
+  public RecipeSymbol.Builder visitByteSizeArg(DirectivesParser.ByteSizeArgContext ctx) {
+    builder.addToken(new ByteSize(ctx.BYTE_SIZE().getText()));
+    return builder;
+  }
+
+/**
+ * Processes a TIME_DURATION argument encountered in the parse tree.
+ *
+ * This method is invoked when the parser identifies a TIME_DURATION token,
+ * such as "30s" or "2h", in the input. It extracts the textual
+ * representation of the time duration from the context, constructs a
+ * TimeDuration object to encapsulate the value and its unit, and adds this
+ * token to the current RecipeSymbol.Builder instance for further processing.
+ *
+ * @param ctx The parse tree context corresponding to the TIME_DURATION argument.
+ * @return The updated RecipeSymbol.Builder instance with the new TimeDuration token added.
+ */
+  @Override
+  public RecipeSymbol.Builder visitTimeDurationArg(DirectivesParser.TimeDurationArgContext ctx) {
+    builder.addToken(new TimeDuration(ctx.TIME_DURATION().getText()));
     return builder;
   }
 

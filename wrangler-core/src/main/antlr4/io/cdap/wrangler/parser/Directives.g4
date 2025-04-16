@@ -64,7 +64,19 @@ directive
     | stringList
     | numberRanges
     | properties
+    | byteSizeArg       // Added new grammar
+    | timeDurationArg   // Added new grammar
   )*?
+  ;
+
+// Added grammar for ByteSize and TimeDuration 
+
+  byteSizeArg
+  : BYTE_SIZE
+  ;
+
+  timeDurationArg
+  : TIME_DURATION
   ;
 
 ifStatement
@@ -139,8 +151,9 @@ numberRange
  : Number ':' Number '=' value
  ;
 
+//Added grammar
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION
  ;
 
 ecommand
@@ -251,6 +264,24 @@ Tilde    : '~';
 Bool
  : 'true'
  | 'false'
+ ;
+
+// Rules for ByteSize and TimeDuration
+
+BYTE_SIZE
+ : Int BYTE_UNIT
+ ;
+
+TIME_DURATION
+ : Int TIME_UNIT
+ ;
+
+fragment BYTE_UNIT
+ : 'KB' | 'MB' | 'GB' | 'TB' | 'PB' | 'B'
+ ;
+
+fragment TIME_UNIT
+ : 'ms' | 's' | 'm' | 'h' | 'd'
  ;
 
 Number

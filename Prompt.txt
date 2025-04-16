@@ -1,0 +1,45 @@
+/*
+ * Copyright © 2017-2019 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+1. Prompt: 
+"Modify an ANTLR4 grammar file to support new tokens for parsing byte sizes (e.g., KB, MB, GB) and time durations (e.g., ms, s, min). Return the updated lexer and parser rules."
+
+2. Prompt: 
+"Create a Java class named ByteSize that takes a string like '10KB' or '1.5MB' and parses it into bytes. Include methods like getBytes() and toString()."
+
+3. Prompt: 
+"Create a Java class named TimeDuration that parses strings like '150ms', '2.3s', and '1min' into nanoseconds. Add methods to return duration in seconds, milliseconds, or minutes."
+
+4. Prompt: 
+"Add new visitor logic in an ANTLR-based parser to parse BYTE_SIZE and TIME_DURATION values into custom token objects in Java."
+
+5. Prompt: 
+"Design a new directive for CDAP Wrangler called aggregate-stats that aggregates columns with byte size and time duration units and stores totals in specified target columns."
+
+6. Prompt: 
+"Write a JUnit test class for testing a Wrangler directive that aggregates size and time columns, verifying float tolerance for precision."
+
+7. Prompt: 
+"Provide example Wrangler input data and a recipe using the aggregate-stats directive. Include expected output for demonstration."
+
+8. Prompt:
+"Create a clean and readable README.md for a Wrangler enhancement that adds parsing and aggregation support for byte sizes and time durations. Include sections like Overview, Features, Usage, Implementation, File Structure, and AI Tools Used."
+
+9. Prompt:
+"Generate file structure and Maven build tips for a multi-module Java project that includes grammar changes, API enhancements, directive implementation, and unit testing."
+
+10. Prompt:
+"Document how AI tools contributed to a Java-based parsing and aggregation project, including prompt-based assistance for grammar writing, class generation, and test creation."
+

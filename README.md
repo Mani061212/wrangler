@@ -216,3 +216,37 @@ Cask is a trademark of Cask Data, Inc. All rights reserved.
 
 Apache, Apache HBase, and HBase are trademarks of The Apache Software Foundation. Used with
 permission. No endorsement by The Apache Software Foundation is implied by the use of these marks.
+
+//New Feature added
+# CDAP Wrangler Enhancement: Byte Size and Time Duration Units Support
+
+## 📌 Overview
+
+This enhancement introduces native parsing support for **byte size units** (e.g., `KB`, `MB`, `GB`) and **time duration units** (e.g., `ms`, `s`, `min`) in the **Wrangler** library for CDAP. These additions simplify the processing and aggregation of size- and time-based data fields in Wrangler recipes.
+
+## ✨ Features Added
+
+- ✅ New token types: `BYTE_SIZE`, `TIME_DURATION`
+- ✅ Support for units like `KB`, `MB`, `GB`, `ms`, `s`, `min`, etc.
+- ✅ Java classes to parse and standardize units:
+  - `ByteSize.java`: parses strings like `10KB`, `1.5MB` into bytes
+  - `TimeDuration.java`: parses strings like `150ms`, `2.3s` into nanoseconds
+- ✅ New aggregate directive: `aggregate-stats`
+- ✅ Unit tests for parsing and directive logic
+
+---
+
+## 🧪 Example Usage
+
+### ✅ Input Sample
+
+| data_transfer_size | response_time |
+|--------------------|---------------|
+| 2MB                | 150ms         |
+| 512KB              | 2s            |
+| 1.5GB              | 1.2s          |
+
+### ✅ Recipe
+
+```wrangler
+aggregate-stats :data_transfer_size :response_time total_size_mb total_time_sec
